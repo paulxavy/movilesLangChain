@@ -39,7 +39,7 @@ const User = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/nombres');
+            const response = await axios.get('http://localhost:9004/nombres');
             const jsonData = response.data;
             setUsers(jsonData);
         } catch (error) {
@@ -50,7 +50,7 @@ const User = () => {
 
     const deleteUser = async (item) => {
         try {
-            const response = await axios.delete(`http://localhost:3000/nombres/${item.id}`);
+            const response = await axios.delete(`http://localhost:9004/nombres/${item.id}`);
             
             if (response.status === 204) {
                 setUsers(users.filter(i => i.id !== item.id));
@@ -63,7 +63,7 @@ const User = () => {
 
     const editUser = async () => {
         try {
-            const response = await axios.put(`http://localhost:3000/nombres/${selectedUser.id}`, {
+            const response = await axios.put(`http://localhost:9004/nombres/${selectedUser.id}`, {
                 firstName: selectedUser.firstName,
                 lastName: selectedUser.lastName
             }, {
@@ -91,7 +91,7 @@ const User = () => {
     }
     const createUser = async () => {
         try {
-            const response = await axios.post('http://localhost:3000/nombres', {
+            const response = await axios.post('http://localhost:9004/nombres', {
                 firstName,
                 lastName
             }, {

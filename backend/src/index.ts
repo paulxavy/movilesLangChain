@@ -33,14 +33,17 @@ import {OpenAI, } from 'openai'
 import * as path from "path";
 
 const openai = new OpenAI({
-    apiKey: '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', // This is the default and can be omitted
+    apiKey: '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', // This is the default and can be omitted
   });
 
 const generatePrompt = (numberToConvert: number) => {
     return ` Tu tienes un rol de convertidor binario y requiero que conviertes este numero ${numberToConvert} a  binario`
 
 }
+const generateContador = (numberToConvert: number) => {
+    return ` Tu tienes un rol de contar el numero de letras del siguiente texto sin contar los espacios solo las letras :${numberToConvert} `
 
+}
 let names = [
     {
         id: uuidv4(),
@@ -66,6 +69,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     }
     const response = await process_doc(req.file?.filename, req.body.question)
     res.send(response)
+   
 })
 app.get("/hola/:nombre/:apellido", (req, res) => {
     console.log("alguien ha dado pin!!")
@@ -88,19 +92,38 @@ app.post('/nombres', (req, res) => {
     res.send(item)
 })
 
-app.post('/openapi', async (req, res) => {
-    const {prompt} = req.body
-    console.log(prompt)
+app.post("/openapi", async (req, res) => {
+    console.log();
+    const { prompt } = req.body;
     const completion = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: `${prompt}` }],
-        temperature: 0.1
-    })
-    
-
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: generatePrompt(prompt) }],
+    });
+  
     // @ts-ignore
-    res.send({result: completion.data.choices[0].text.trim(), token: completion.data.usage.total_tokens})
-})
+    res.send({
+      // @ts-ignore
+      result: completion.choices[0].message.content,
+      token: completion.usage?.completion_tokens,
+      // @ts-ignore
+    });
+  });
+  app.post("/contador", async (req, res) => {
+    console.log();
+    const { prompt } = req.body;
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: generateContador(prompt) }],
+    });
+  
+    // @ts-ignore
+    res.send({
+      // @ts-ignore
+      result: completion.choices[0].message.content,
+      token: completion.usage?.completion_tokens,
+      // @ts-ignore
+    });
+  });
 
 app.delete('/nombres/:id', (req, res) => {
     names = names.filter(n => n.id !== req.params.id)

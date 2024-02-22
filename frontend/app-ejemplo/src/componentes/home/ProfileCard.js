@@ -1,16 +1,20 @@
 import React from "react";
 import {View, Text, StyleSheet, Image, Linking,TouchableWithoutFeedback} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import paul from "../../../assets/paul.jpg"
+import CustomIcon from "../../../assets/kwai.png"
+//import I from 'react-native-vector-icons/KwaiIconLibrary';
 const twitter = <Icon name={'twitter'} size={30} color={'black'}/>
 const facebook = <Icon name={'facebook'} size={30} color={'black'}/>
-const instagram = <Icon name={'instagram'} size={30} color={'black'}/>
+const kwai = <Icon name={'kwai'} size={30} color={'black'}/>
 const twitch = <Icon name={'twitch'} size={30} color={'black'}/>
 const reddit = <Icon name={'reddit'} size={30} color={'black'}/>
+const load = <Image source={CustomIcon} style={{ width: 50, height: 50 }} />
+//const file = {test}
 const ProfileCard = () => {
     const user = {
-        avatar: "https://wallpapercave.com/uwp/uwp3658047.png",
-        coverPhoto: "https://wallpapercave.com/wp/nsu3cSp.jpg",
+        avatar: paul,
+        coverPhoto: "https://1.bp.blogspot.com/-Zloi1ZJhubw/T0bUdC_UiOI/AAAAAAAAADE/zYXx7Vxlu7k/s1600/Plaza%2BIndoam%252B%25C2%25AErica%2B3.JPG",
         name: "Paul Martinez"
     }
     return (
@@ -35,9 +39,9 @@ const ProfileCard = () => {
                     {twitter}
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback style={{color: 'blue'}} onPress={() => {
-                    Linking.openURL('https://instagram.com/costa.scp')
+                    Linking.openURL('https://www.kwai.com/es')
                 }}>
-                    {instagram}
+                    {load}
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={()=>Linking.openURL('https://www.twitch.tv/')}>
                     {twitch}

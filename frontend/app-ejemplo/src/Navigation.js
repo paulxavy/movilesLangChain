@@ -7,7 +7,7 @@ import ListComponent from "./componentes/list/List";
 import User from './screen/User'
 import Chat from "./screen/Chat";
 import Pdf from "./screen/Pdf";
-
+import Contador from "./screen/Contador";
 const Tab = createBottomTabNavigator()
 
 const Navigation = () => {
@@ -33,6 +33,12 @@ const Navigation = () => {
             }}/>
             <Tab.Screen name={'openIA'} component={Chat} options={{
                 tabBarLabel: 'openIA',
+                tabBarIcon: ({color, size}) => (
+                    <MaterialCommunityIcons name={'brain'} color={color} size={size}/>
+                )
+            }}/>
+            <Tab.Screen name={'contador'} component={Contador} options={{
+                tabBarLabel: 'contador',
                 tabBarIcon: ({color, size}) => (
                     <MaterialCommunityIcons name={'brain'} color={color} size={size}/>
                 )

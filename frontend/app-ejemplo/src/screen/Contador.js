@@ -9,7 +9,7 @@ const Chat = () => {
 
     const getResultFromOpenApi = async () => {
         try {
-            const response = await axios.post('http://192.168.21.159:9004/openapi', {
+            const response = await axios.post('http://192.168.1.40:9004/contador', {
                 prompt
             }, {
                 headers: {
@@ -28,7 +28,7 @@ const Chat = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>
-                {'Ingrese El numero que desea convertir a binario'}
+                {'Ingrese la palabra que quieras contar las letras'}
             </Text>
             <TextInput style={styles.input} value={prompt} onChangeText={setPrompt}/>
             <Button title={'Enviar'} onPress={getResultFromOpenApi}/>
